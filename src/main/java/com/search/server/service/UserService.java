@@ -1,14 +1,21 @@
 package com.search.server.service;
 
+import com.search.server.config.security.JwtTokenProvider;
 import com.search.server.domain.User;
 import com.search.server.dto.UserDto;
 import com.search.server.exception.biz.DuplicationSignUpException;
+import com.search.server.exception.biz.UserNotFoundException;
+import com.search.server.exception.biz.WrongPasswordException;
 import com.search.server.repository.UserRepository;
-import com.search.server.util.PasswordEncryption;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.Optional;
 
 /**
@@ -23,11 +30,12 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public UserDto.Info join(UserDto.Request request) {
-        String enPassword = PasswordEncryption.encode(request.getPassword());
-        Optional<User> findUser = userRepository.findUserByUserNameAndPassword(request.getUserName(), enPassword);
+        Optional<User> findUser = userRepository.findByUserName(request.getUserName());
 
         // TODO: Optional null 체크 가능?
         if (findUser.isPresent()) {
@@ -36,13 +44,24 @@ public class UserService {
 
         User user = User.builder()
                 .userName(request.getUserName())
-                .password(PasswordEncryption.encode(request.getPassword()))
+                .password(passwordEncoder.encode(request.getPassword()))
+                .roles(Collections.singletonList("ROLE_USER"))
                 .build();
 
         User saveUser = userRepository.save(user);
 
         return UserDto.Info.builder()
-                .userName(saveUser.getUserName())
+                .userName(saveUser.getUsername())
                 .build();
+    }
+
+    @Transactional
+    public String login(UserDto.Request request) {
+        User findUser = userRepository.findByUserName(request.getUserName())
+                .orElseThrow(UserNotFoundException::new);
+        if (!passwordEncoder.matches(request.getPassword(), findUser.getPassword())) {
+            throw new WrongPasswordException();
+        }
+        return jwtTokenProvider.createToken(findUser.getUsername(), findUser.getRoles());
     }
 }

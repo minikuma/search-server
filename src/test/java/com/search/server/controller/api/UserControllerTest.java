@@ -3,7 +3,6 @@ package com.search.server.controller.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.search.server.dto.UserDto;
 import com.search.server.exception.ErrorCode;
-import com.search.server.util.PasswordEncryption;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -44,7 +43,7 @@ class UserControllerTest {
         setUp();
         UserDto.Request user = new UserDto.Request();
         user.setUserName("회원-1");
-        user.setPassword(PasswordEncryption.encode("비밀번호-1"));
+//        user.setPassword(PasswordEncryption.encode("비밀번호-1"));
 
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -61,7 +60,7 @@ class UserControllerTest {
         setUp();
         UserDto.Request user = new UserDto.Request();
         user.setUserName("회원-2");
-        user.setPassword(PasswordEncryption.encode("비밀번호-2"));
+//        user.setPassword(PasswordEncryption.encode("비밀번호-2"));
 
         ObjectMapper objectMapper = new ObjectMapper();
 
