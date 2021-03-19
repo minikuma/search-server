@@ -12,12 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * User 컨트롤러
- * @version 1.0
- * @author jeonjihoon
- */
-
-/**
  * 회원 컨트롤러
  * @version 1.0
  * @author jeonjihoon
