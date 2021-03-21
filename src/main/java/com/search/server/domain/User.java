@@ -27,7 +27,7 @@ public class User extends BaseEntity  implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
-    @Column
+    @Column(unique = true)
     private String userName;
 
     @Column
@@ -35,7 +35,7 @@ public class User extends BaseEntity  implements UserDetails {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
-    private List<String> roles = new ArrayList<>();
+    private final List<String> roles = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

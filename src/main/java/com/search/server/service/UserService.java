@@ -2,15 +2,13 @@ package com.search.server.service;
 
 import com.search.server.config.security.JwtTokenProvider;
 import com.search.server.domain.User;
-import com.search.server.dto.UserDto;
+import com.search.server.dto.user.UserDto;
+import com.search.server.dto.user.UserLoginResponseDto;
 import com.search.server.exception.biz.DuplicationSignUpException;
 import com.search.server.exception.biz.UserNotFoundException;
 import com.search.server.exception.biz.WrongPasswordException;
 import com.search.server.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -56,12 +54,13 @@ public class UserService {
     }
 
     @Transactional
-    public String login(UserDto.Request request) {
+    public UserLoginResponseDto login(UserDto.Request request) {
         User findUser = userRepository.findByUserName(request.getUserName())
                 .orElseThrow(UserNotFoundException::new);
         if (!passwordEncoder.matches(request.getPassword(), findUser.getPassword())) {
             throw new WrongPasswordException();
         }
-        return jwtTokenProvider.createToken(findUser.getUsername(), findUser.getRoles());
+        String token = jwtTokenProvider.createToken(findUser.getUsername(), findUser.getRoles());
+        return UserLoginResponseDto.builder().token(token).build();
     }
 }

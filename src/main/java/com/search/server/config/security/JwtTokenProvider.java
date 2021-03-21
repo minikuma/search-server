@@ -1,6 +1,5 @@
 package com.search.server.config.security;
 
-import com.search.server.service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -21,7 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Component
 public class JwtTokenProvider {
-
     private String secretKey = "webfirewood";
 
     // 토큰 유효시간 30분

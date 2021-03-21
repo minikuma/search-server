@@ -1,12 +1,14 @@
-package com.search.server.dto;
+package com.search.server.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+
 /**
- * User 입출력 처리를 위한 클래스
+ * 사용자 관리를 위한 클래스
  * @version 1.0
  * @author jeonjihoon
  */
@@ -23,7 +25,9 @@ public class UserDto {
     @Getter
     @Setter
     public static class Request {
+        @NotBlank(message = "사용자 이름은 필수값 입니다.")
         private String userName;
+        @NotBlank(message = "비밀번호는 필수값 입니다.")
         private String password;
     }
 

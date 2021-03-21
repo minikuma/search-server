@@ -1,6 +1,7 @@
 package com.search.server.controller.api;
 
-import com.search.server.dto.UserDto;
+import com.search.server.dto.user.UserDto;
+import com.search.server.dto.user.UserLoginResponseDto;
 import com.search.server.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 /**
  * 회원 컨트롤러
@@ -32,7 +35,7 @@ public class UserController {
      */
 
     @PostMapping("/signup")
-    public ResponseEntity<UserDto.Response> signUp(@RequestBody UserDto.Request request) {
+    public ResponseEntity<UserDto.Response> signUp(@Valid @RequestBody UserDto.Request request) {
         log.info(request.getUserName() + " : " + request.getPassword());
         UserDto.Info joinUserName = userService.join(request);
         return new ResponseEntity<>(new UserDto.Response(joinUserName, 200, "success"),
@@ -46,7 +49,7 @@ public class UserController {
      */
 
     @PostMapping("/login")
-    public String login(@RequestBody UserDto.Request request) {
+    public UserLoginResponseDto login(@Valid @RequestBody UserDto.Request request) {
         log.info(request.getUserName() + " : " + request.getPassword());
         return userService.login(request);
     }
