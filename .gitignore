@@ -7,8 +7,6 @@
 
 # User-specific stuff
 .idea/inspectionProfiles/Project_Default.xml
-# Generated files
-.idea
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
