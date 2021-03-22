@@ -32,7 +32,7 @@ public class SearchHistoryService {
     }
 
     public BaseHistoryResponse<HistoryDto> searchHistoryList(HistoryRequestDto request) {
-        List<SearchHistory> findHistoryList = searchHistoryRepository.findByUserName(request.getUserName());
+        List<SearchHistory> findHistoryList = searchHistoryRepository.findByUserNameOrderByIdDesc(request.getUserName());
         List<HistoryDto> lists = findHistoryList.stream().map(searchHistory -> HistoryDto.builder()
                 .searchDate(searchHistory.getSearchDate())
                 .keyWord(searchHistory.getKeyWord())
