@@ -30,7 +30,7 @@ public class KakaoSearchResponseDto {
     @NoArgsConstructor
     @Builder
     @Data
-    private static class Documents {
+    public static class Documents {
         @JsonProperty("place_name")
         private String placeName;  // 장소이름
 
@@ -46,7 +46,7 @@ public class KakaoSearchResponseDto {
     @NoArgsConstructor
     @Builder
     @Data
-    private static class Meta {
+    public static class Meta {
         @JsonProperty("total_count")
         private int totalCount;
         @JsonProperty("pageable_count")
@@ -54,7 +54,6 @@ public class KakaoSearchResponseDto {
         @JsonProperty("is_end")
         private boolean isEnd;
     }
-
 
     public BaseResponseDto<SearchDto> convertSerchResponse(SearchRequestDto request) {
         return BaseResponseDto.<SearchDto>builder()

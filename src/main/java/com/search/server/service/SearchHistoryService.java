@@ -47,6 +47,7 @@ public class SearchHistoryService {
 
         return BaseHistoryResponse.<HistoryDto>builder()
                 .history(lists)
+                .totalCount(lists.size())
                 .status(200)
                 .message("success")
                 .build();

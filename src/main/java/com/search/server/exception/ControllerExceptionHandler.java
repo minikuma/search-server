@@ -1,8 +1,6 @@
 package com.search.server.exception;
 
-import com.search.server.exception.biz.DuplicationSignUpException;
-import com.search.server.exception.biz.UserNotFoundException;
-import com.search.server.exception.biz.WrongPasswordException;
+import com.search.server.exception.biz.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -31,6 +29,16 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ErrorResponse.Response> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
         return getGlobalResponseEntity(e);
+    }
+
+    @ExceptionHandler(KakaoOpenApiException.class)
+    protected ResponseEntity<ErrorResponse.Response> handlerKakaoOpenApiException(CustomException e) {
+        return getResponseEntity(e);
+    }
+
+    @ExceptionHandler(NaverOpenApiException.class)
+    protected ResponseEntity<ErrorResponse.Response> handlerNaverOpenApiException(CustomException e) {
+        return getResponseEntity(e);
     }
 
     private ResponseEntity<ErrorResponse.Response> getResponseEntity(CustomException e) {

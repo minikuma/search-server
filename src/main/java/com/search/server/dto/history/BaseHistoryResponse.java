@@ -20,6 +20,7 @@ import java.util.List;
 @Getter
 public class BaseHistoryResponse<T> {
     private List<T> history;
+    private int totalCount;
     private int status;
     private String message;
 }

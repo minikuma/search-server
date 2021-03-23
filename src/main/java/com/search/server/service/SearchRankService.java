@@ -45,6 +45,7 @@ public class SearchRankService {
 
         return BaseRankResponse.<SearchRankDto>builder()
                 .ranking(lists)
+                .totalCount(lists.size())
                 .status(200)
                 .message("success")
                 .build();

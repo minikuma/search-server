@@ -30,7 +30,7 @@ class NaverSearchServiceTest {
         SearchRequestDto request = SearchRequestDto.builder()
                 .page(1)
                 .size(2)
-                .keyWord("곱창")
+                .keyWord("전골")
                 .build();
 
         // when

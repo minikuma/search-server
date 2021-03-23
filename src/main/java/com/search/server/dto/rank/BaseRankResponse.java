@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 public class BaseRankResponse<T> {
     private List<T> ranking;
+    private int totalCount;
     private int status;
     private String message;
 }

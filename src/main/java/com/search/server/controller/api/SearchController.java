@@ -33,12 +33,11 @@ public class SearchController {
 
     @GetMapping("/user/search")
     public BaseResponseDto<SearchDto> search(@RequestBody SearchRequestDto request, @RequestHeader(name = "X-USER-NAME") String userName) {
+
         BaseResponseDto<SearchDto> kakaoResponse = kakaoSearchService.searchData(request);
         BaseResponseDto<SearchDto> naverResponse = naverSearchService.searchData(request);
 
         searchHistoryService.createSearchHistory(request, userName);
-
-        // TODO: 검색어 + 횟수 증가 테이블 저장
         searchRankService.registSearchRank(request);
 
         List<SearchDto> convertPlaces = PrioritySearch.prioritySearchResult(kakaoResponse, naverResponse);
