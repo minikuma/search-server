@@ -8,6 +8,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * 시큐리티 상세(사용자 조회) 서비스
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @RequiredArgsConstructor
 @Service
 public class CustomUserService implements UserDetailsService {

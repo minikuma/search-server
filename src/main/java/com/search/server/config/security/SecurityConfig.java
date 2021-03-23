@@ -34,8 +34,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/signup", "/api/v1/login").permitAll()
+                .antMatchers("/api/v1/signup", "/api/v1/login", "/h2-console/**").permitAll()
                 .anyRequest().authenticated()
+                .and()
+                .csrf().ignoringAntMatchers("/h2-console/**")
+                .disable()
+                .headers()
+                .frameOptions()
+                .disable()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
     }

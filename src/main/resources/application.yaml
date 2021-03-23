@@ -4,7 +4,7 @@ spring:
     port: 6379
   datasource:
     initialization-mode: always
-    url: jdbc:h2:mem:searcdb
+    url: jdbc:h2:mem:searcdb;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -34,3 +34,6 @@ external:
     api: https://openapi.naver.com/v1/search/local.json?
     client-id: nLVpM1bLgQDCkD7nNaUq
     client-secret: bIdM2DYoYX
+---
+token:
+  secret-key: search

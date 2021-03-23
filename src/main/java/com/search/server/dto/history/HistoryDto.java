@@ -8,6 +8,12 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * 검색 히스토리 세부 항목 DTO
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

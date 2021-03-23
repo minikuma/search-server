@@ -11,6 +11,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 검색 히스토리 도메인 클래스
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor

@@ -14,6 +14,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 검색 히스토리 서비스
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -33,6 +39,7 @@ public class SearchHistoryService {
 
     public BaseHistoryResponse<HistoryDto> searchHistoryList(HistoryRequestDto request) {
         List<SearchHistory> findHistoryList = searchHistoryRepository.findByUserNameOrderByIdDesc(request.getUserName());
+
         List<HistoryDto> lists = findHistoryList.stream().map(searchHistory -> HistoryDto.builder()
                 .searchDate(searchHistory.getSearchDate())
                 .keyWord(searchHistory.getKeyWord())

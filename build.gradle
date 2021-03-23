@@ -2,6 +2,7 @@ buildscript {
     ext {
         springBootVersion = "2.4.3"
         p6spy = "1.5.6"
+        jwt = "0.9.1"
     }
     repositories {
         mavenCentral()
@@ -42,8 +43,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testCompileOnly("org.projectlombok:lombok")
     testAnnotationProcessor("org.projectlombok:lombok")
-    implementation("io.jsonwebtoken:jjwt:0.9.1")
-    compile group: 'it.ozimov', name: 'embedded-redis', version: '0.7.1'
+    implementation("io.jsonwebtoken:jjwt:${jwt}")
 }
 
 test {

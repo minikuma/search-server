@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 회원 클래스
+ * 사용자 클래스
  * @version 1.0
  * @author jeonjihoon
  */
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class User extends BaseEntity  implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long id;
 
     @Column(unique = true)
     private String userName;

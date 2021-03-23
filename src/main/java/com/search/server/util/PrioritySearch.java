@@ -13,7 +13,7 @@ import java.util.*;
  */
 @Slf4j
 public class PrioritySearch {
-    public static List<SearchDto> prioritySearchResult(BaseResponseDto<SearchDto> r1, BaseResponseDto<SearchDto> r2, int size) {
+    public static List<SearchDto> prioritySearchResult(BaseResponseDto<SearchDto> r1, BaseResponseDto<SearchDto> r2) {
         WeakHashMap<String, Integer> maps = new WeakHashMap<>();
 
         for (int i = 0; i < r1.getPlaces().size(); i++) {
@@ -25,10 +25,8 @@ public class PrioritySearch {
         }
 
         List<Map.Entry<String, Integer>> list = new LinkedList<>(maps.entrySet());
-
         sortedList(list);
-
-        return createSearchDtoList(list, size);
+        return createSearchDtoList(list);
     }
 
     /**
@@ -45,10 +43,9 @@ public class PrioritySearch {
     /**
      * 정렬된 리스트 기준으로 결과 셋 생성
      * @param list (맵 정렬 리스트)
-     * @param size (요청 사이즈)
      * @return SearchDto 결과 셋 리스트
      */
-    private static List<SearchDto> createSearchDtoList(List<Map.Entry<String, Integer>> list, int size) {
+    private static List<SearchDto> createSearchDtoList(List<Map.Entry<String, Integer>> list) {
         LinkedHashMap<String, Integer> sortedMap = new LinkedHashMap<>();
 
         for (Map.Entry<String, Integer> entry : list) {
@@ -58,12 +55,11 @@ public class PrioritySearch {
         List<String> mapToLists = new ArrayList<>(sortedMap.keySet());
         List<SearchDto> searchDtoList = new ArrayList<>();
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < list.size(); i++) {
             SearchDto searchDto = SearchDto.builder()
                     .placeName(mapToLists.get(i)).build();
             searchDtoList.add(searchDto);
         }
-
         return searchDtoList;
     }
 }

@@ -44,11 +44,11 @@ class UserRepositoryTest {
         userRepository.save(user);
 
         // then
-        User findUser = userRepository.findById(user.getUserId()).orElseThrow(UserNotFoundException::new);
+        User findUser = userRepository.findById(user.getId()).orElseThrow(UserNotFoundException::new);
 
         log.info("input password = " + user.getPassword() + " : " + "find password = " + findUser.getPassword());
 
-        assertEquals(user.getUserId(), findUser.getUserId());
+        assertEquals(user.getId(), findUser.getId());
         assertEquals(user.getUsername(), findUser.getUsername());
         assertEquals(user.getPassword(), findUser.getPassword());
     }
@@ -71,7 +71,7 @@ class UserRepositoryTest {
         User findUser = userRepository.findByUserName(user.getUsername())
                 .orElseThrow(UserNotFoundException::new);
 
-        assertEquals(user.getUserId(), findUser.getUserId());
+        assertEquals(user.getId(), findUser.getId());
         assertEquals(user.getUsername(), findUser.getUsername());
         assertEquals(user.getPassword(), findUser.getPassword());
     }

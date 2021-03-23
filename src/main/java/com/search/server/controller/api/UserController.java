@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 /**
- * 회원 컨트롤러
+ * 사용자 관리 컨트롤러
  * @version 1.0
  * @author jeonjihoon
  */

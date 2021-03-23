@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 검색 히스토리 컨트롤러
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor

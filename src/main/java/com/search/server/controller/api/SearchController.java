@@ -4,6 +4,7 @@ import com.search.server.dto.search.BaseResponseDto;
 import com.search.server.dto.search.SearchDto;
 import com.search.server.dto.search.SearchRequestDto;
 import com.search.server.service.SearchHistoryService;
+import com.search.server.service.SearchRankService;
 import com.search.server.service.external.impl.KakaoSearchService;
 import com.search.server.service.external.impl.NaverSearchService;
 import com.search.server.util.PrioritySearch;
@@ -12,6 +13,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+/**
+ * 검색 컨트롤러
+ * @version 1.0
+ * @author jeonjihoon
+ */
 
 @Slf4j
 @RestController
@@ -22,6 +29,7 @@ public class SearchController {
     private final KakaoSearchService kakaoSearchService;
     private final NaverSearchService naverSearchService;
     private final SearchHistoryService searchHistoryService;
+    private final SearchRankService searchRankService;
 
     @GetMapping("/user/search")
     public BaseResponseDto<SearchDto> search(@RequestBody SearchRequestDto request, @RequestHeader(name = "X-USER-NAME") String userName) {
@@ -30,7 +38,11 @@ public class SearchController {
 
         searchHistoryService.createSearchHistory(request, userName);
 
-        List<SearchDto> convertPlaces = PrioritySearch.prioritySearchResult(kakaoResponse, naverResponse, request.getSize());
+        // TODO: 검색어 + 횟수 증가 테이블 저장
+        searchRankService.registSearchRank(request);
+
+        List<SearchDto> convertPlaces = PrioritySearch.prioritySearchResult(kakaoResponse, naverResponse);
+
         return BaseResponseDto.<SearchDto>builder()
                 .places(convertPlaces)
                 .page(request.getPage())
@@ -39,14 +51,4 @@ public class SearchController {
                 .totalCount(request.getSize())
                 .build();
     }
-//
-//    @GetMapping("/user/search/kakao")
-//    public BaseResponseDto<SearchDto> kakaoSearch(@RequestBody SearchRequestDto request) {
-//        return kakaoSearchService.searchData(request);
-//    }
-//
-//    @GetMapping("/user/search/naver")
-//    public BaseResponseDto<SearchDto> naverSearch(@RequestBody SearchRequestDto request) {
-//        return naverSearchService.searchData(request);
-//    }
 }

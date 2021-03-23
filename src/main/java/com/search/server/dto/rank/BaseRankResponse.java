@@ -1,4 +1,4 @@
-package com.search.server.dto.history;
+package com.search.server.dto.rank;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,19 +7,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**
- * 검색 히스토리 응답 DTO
- * @param <T>
- * @version 1.0
- * @author jeonjihoon
- */
-
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-public class BaseHistoryResponse<T> {
-    private List<T> history;
+public class BaseRankResponse<T> {
+    private List<T> ranking;
     private int status;
     private String message;
 }

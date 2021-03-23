@@ -1,4 +1,4 @@
-package com.search.server.dto.search;
+package com.search.server.dto.rank;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,17 +6,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 /**
- * 검색 랭킹을 위한 클래스
+ * 검색 랭크 세부 항목 DTO
  * @version 1.0
  * @author jeonjihoon
- *
  */
 
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Getter
-public class SearchRank {
+public class SearchRankDto {
     private String keyWord;
-    private int count;
+    private int rankingCount;
 }
