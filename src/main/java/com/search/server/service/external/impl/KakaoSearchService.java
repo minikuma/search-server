@@ -21,6 +21,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Objects;
 
+/**
+ * kakao open api 연동 처리 서비스
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Slf4j
 @EnableRetry
 @RequiredArgsConstructor
@@ -47,7 +53,6 @@ public class KakaoSearchService implements SerachOpenApiService {
 
         try {
             ResponseEntity<KakaoSearchResponseDto> responseEntity = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, KakaoSearchResponseDto.class);
-            log.info("here!!");
             return Objects.requireNonNull(responseEntity.getBody()).convertSerchResponse(request);
         } catch (Exception e) {
             throw new KakaoOpenApiException();
@@ -56,7 +61,6 @@ public class KakaoSearchService implements SerachOpenApiService {
 
     @Recover
     private BaseResponseDto<SearchDto> recover(KakaoOpenApiException e, SearchRequestDto request) {
-        log.info("Kakao Open API Fault " + e.getMessage());
         return new BaseResponseDto<SearchDto>();
     }
 }

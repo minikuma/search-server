@@ -1,0 +1,71 @@
+
+############################ Start ############################
+
+### 시나리오 1) 사용자가 회원 가입을 한다.
+POST http://localhost:8080/api/v1/signup
+Content-Type: application/json
+
+< ../request/signup.json
+
+> {%
+client.global.set('userName', response.body.info.userName);
+%}
+
+
+### 시나리오 2) 중복으로 회원 가입을 한다. (Biz 에러 발생 200 OK)
+POST http://localhost:8080/api/v1/signup
+Content-Type: application/json
+
+< ../request/signup.json
+
+### 시나리오 3) 사용자가 잘못된 패스워드로 로그인 한다. (Biz 에러 발생 200 OK)
+POST http://localhost:8080/api/v1/login
+Content-Type: application/json
+
+< ../request/login-password-fail.json
+
+### 시나리오 4) 사용자가 잘못된 사용자로 로그인 한다. (Biz 에러 발생 200 OK)
+POST http://localhost:8080/api/v1/login
+Content-Type: application/json
+
+< ../request/login-user-fail.json
+
+### 시나리오 5) 정상적으로 로그인을 한다.
+POST http://localhost:8080/api/v1/login
+Content-Type: application/json
+
+< ../request/login-success.json
+
+> {%
+client.global.set('auth_token', response.body.token);
+%}
+
+### 시나리오 6) 허용되지 않은 사용자가 검색 키워드를 입력하여 검색한다. (403)
+GET http://localhost:8080/api/v1/user/search
+Content-Type: application/json
+X-USER-NAME: {{userName}}
+Authorization:
+
+< ../request/search.json
+
+### 시나리오 7) 허용된 사용자가 검색 키워드(스프링)을 입력하여 검색한다.
+GET http://localhost:8080/api/v1/user/search
+Content-Type: application/json
+X-USER-NAME: {{userName}}
+Authorization: Bearer {{auth_token}}
+
+< ../request/search.json
+
+### 시나리오 8) 사용자 자신이 검색한 검색어를 조회한다.
+GET http://localhost:8080/api/v1/user/search/history
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+< ../request/my-seach-keyword.json
+
+### 시니리오 9) 검색어 순위를 검색한다.
+GET http://localhost:8080/api/v1/user/search/ranking
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+############################ End ############################

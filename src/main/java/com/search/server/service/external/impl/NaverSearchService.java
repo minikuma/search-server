@@ -1,8 +1,10 @@
 package com.search.server.service.external.impl;
 
 import com.search.server.config.property.OpenApiProperty;
-import com.search.server.dto.search.*;
-import com.search.server.exception.biz.KakaoOpenApiException;
+import com.search.server.dto.search.BaseResponseDto;
+import com.search.server.dto.search.NaverSearchResponseDto;
+import com.search.server.dto.search.SearchDto;
+import com.search.server.dto.search.SearchRequestDto;
 import com.search.server.exception.biz.NaverOpenApiException;
 import com.search.server.service.external.SerachOpenApiService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,12 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Objects;
+
+/**
+ * naver open api 연동 처리 서비스
+ * @version 1.0
+ * @author jeonjihoon
+ */
 
 @Slf4j
 @RequiredArgsConstructor
@@ -52,7 +60,6 @@ public class NaverSearchService implements SerachOpenApiService {
 
     @Recover
     private BaseResponseDto<SearchDto> recover(NaverOpenApiException e, SearchRequestDto request) {
-        log.info("Naver Open API Fault");
         return new BaseResponseDto<SearchDto>();
     }
 }

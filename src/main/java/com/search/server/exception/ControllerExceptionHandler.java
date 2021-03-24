@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 예외 컨트롤러
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @ControllerAdvice(annotations = RestController.class)
 public class ControllerExceptionHandler {
 

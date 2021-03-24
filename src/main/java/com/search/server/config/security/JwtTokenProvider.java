@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ public class JwtTokenProvider {
     private final TokenProperty tokenProperty;
 
     private String secretKey;
-
+    private final static String AUTHORIZATION_HEADER = "Authorization";
     private final UserDetailsService userDetailsService;
 
     // 객체 초기화, secretKey 를 Base64로 인코딩한다.
@@ -60,9 +61,13 @@ public class JwtTokenProvider {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
-    // Request의 Header에서 token 값을 가져옵니다. "X-AUTH-TOKEN" : "TOKEN값'
     public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("X-AUTH-TOKEN");
+        String token = request.getHeader(AUTHORIZATION_HEADER);
+        if (StringUtils.hasText(token) && token.startsWith("Bearer")) {
+            return token.substring(7);
+        } else {
+            return null;
+        }
     }
 
     // 토큰의 유효성 + 만료일자 확인

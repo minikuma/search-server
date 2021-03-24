@@ -13,6 +13,5 @@ public interface SerachOpenApiService {
      * @version 1.0
      * @author jeonjihoon
      */
-
     BaseResponseDto<SearchDto> searchData(SearchRequestDto request);
 }

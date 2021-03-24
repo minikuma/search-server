@@ -5,6 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 토큰 정보
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

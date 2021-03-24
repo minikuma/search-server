@@ -5,6 +5,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * Open API 외부 프로퍼티
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Data
 @Configuration
 @ConfigurationProperties(prefix = "external")

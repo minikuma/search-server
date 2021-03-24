@@ -5,6 +5,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+/**
+ * 검색 정보
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

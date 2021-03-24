@@ -9,6 +9,12 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Naver Open Search API 응답
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

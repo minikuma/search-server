@@ -37,7 +37,9 @@ public class SearchController {
         BaseResponseDto<SearchDto> kakaoResponse = kakaoSearchService.searchData(request);
         BaseResponseDto<SearchDto> naverResponse = naverSearchService.searchData(request);
 
+        // 검색 히스토리 생성 (user-name 기준)
         searchHistoryService.createSearchHistory(request, userName);
+        // 검색 랭킹 등록
         searchRankService.registSearchRank(request);
 
         List<SearchDto> convertPlaces = PrioritySearch.prioritySearchResult(kakaoResponse, naverResponse);

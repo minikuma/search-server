@@ -7,6 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * 랭킹 정보 응답
+ * @param <T>
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

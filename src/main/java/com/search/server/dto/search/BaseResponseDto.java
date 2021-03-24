@@ -7,6 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+/**
+ * 장소 검색 응답
+ * @param <T>
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
