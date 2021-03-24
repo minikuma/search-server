@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,7 +34,7 @@ public class SearchController {
     private final SearchRankService searchRankService;
 
     @GetMapping("/user/search")
-    public BaseResponseDto<SearchDto> search(@RequestBody SearchRequestDto request, @RequestHeader(name = "X-USER-NAME") String userName) {
+    public BaseResponseDto<SearchDto> search(@RequestBody @Valid SearchRequestDto request, @RequestHeader(name = "X-USER-NAME") String userName) {
 
         BaseResponseDto<SearchDto> kakaoResponse = kakaoSearchService.searchData(request);
         BaseResponseDto<SearchDto> naverResponse = naverSearchService.searchData(request);
@@ -48,8 +50,8 @@ public class SearchController {
                 .places(convertPlaces)
                 .page(request.getPage())
                 .size(request.getSize())
-                .totalPage(request.getPage())
-                .totalCount(request.getSize())
+                .totalPage(1)
+                .totalCount(convertPlaces.size())
                 .build();
     }
 }

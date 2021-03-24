@@ -8,12 +8,14 @@ import java.util.*;
 
 /**
  * OPEN API 결과를 우선순위에 따라 재 정의
- * @version 1.0
+ *
  * @author jeonjihoon
+ * @version 1.0
  */
 @Slf4j
 public class PrioritySearch {
     public static List<SearchDto> prioritySearchResult(BaseResponseDto<SearchDto> r1, BaseResponseDto<SearchDto> r2) {
+
         WeakHashMap<String, Integer> maps = new WeakHashMap<>();
 
         for (int i = 0; i < r1.getPlaces().size(); i++) {
@@ -31,6 +33,7 @@ public class PrioritySearch {
 
     /**
      * 맵 엔트리 정보 정렬
+     *
      * @param lists (API 연동 결과 셋)
      */
     private static void sortedList(List<Map.Entry<String, Integer>> lists) {
@@ -42,6 +45,7 @@ public class PrioritySearch {
 
     /**
      * 정렬된 리스트 기준으로 결과 셋 생성
+     *
      * @param list (맵 정렬 리스트)
      * @return SearchDto 결과 셋 리스트
      */
@@ -55,7 +59,15 @@ public class PrioritySearch {
         List<String> mapToLists = new ArrayList<>(sortedMap.keySet());
         List<SearchDto> searchDtoList = new ArrayList<>();
 
-        for (int i = 0; i < list.size(); i++) {
+        int setSize = 0;
+
+        if (list.size() > 10) {
+            setSize = 10;
+        } else {
+            setSize = list.size();
+        }
+
+        for (int i = 0; i < setSize; i++) {
             SearchDto searchDto = SearchDto.builder()
                     .placeName(mapToLists.get(i)).build();
             searchDtoList.add(searchDto);

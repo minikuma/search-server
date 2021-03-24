@@ -1,6 +1,18 @@
 
 ############################ Start ############################
 
+### 사전 1) 회원 가입 시 비밀번호를 누락한다.
+POST http://localhost:8080/api/v1/signup
+Content-Type: application/json
+
+< ../request/signup-password-fail.json
+
+### 사전 2) 회원 가입 시 사용자 이름을 누락한다.
+POST http://localhost:8080/api/v1/signup
+Content-Type: application/json
+
+< ../request/signup-username-fail.json
+
 ### 시나리오 1) 사용자가 회원 가입을 한다.
 POST http://localhost:8080/api/v1/signup
 Content-Type: application/json
@@ -10,7 +22,6 @@ Content-Type: application/json
 > {%
 client.global.set('userName', response.body.info.userName);
 %}
-
 
 ### 시나리오 2) 중복으로 회원 가입을 한다. (Biz 에러 발생 200 OK)
 POST http://localhost:8080/api/v1/signup
