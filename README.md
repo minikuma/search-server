@@ -34,7 +34,10 @@
     * ```spring-boot-starter-web``` Convention 을 통해 Web 환경 구성을 위한 라이브러리 적용
 * 외부 연동 안정성
     * ```spring-retry``` 를 통한 API 재 처리, 복구 구조 적용
-
+* Test
+    * ```spring-boot-starter-test``` Convention 라이브러리 통해 테스트 환경 적용
+    * ```spring-security-test``` Security 관련 테스트
+  
 #### | API 명세
 (1) 회원 가입   
 * URI: POST http://localhost:8080/api/v1/signup
