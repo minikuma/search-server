@@ -13,6 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 검색 랭킹 서비스
+ * @version 1.0
+ * @author jeonjihoon
+ */
+
 @Slf4j
 @Service
 @Transactional(readOnly = true)
