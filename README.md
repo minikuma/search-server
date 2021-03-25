@@ -309,7 +309,7 @@ Case 1) 사용자 이름 체크 (공백, 스페이스 허용 불가)
 * 외부 API 안정성 고려 방안
   * RestTemplate 과 Retry, Recover 를 통한 재 처리 구조
 * 키워드 별 검색 횟수의 정확성 (동시성 이슈 처리)
-  * DML Query 인 경우 Transactional 분리 처리
+  * 기본적으로 Transaction(Read)를 하고, DML Query 인 경우 Transactional 경계를 지정하여 처리
 * JPA 성능 향상   
   * Open-Session-In-View: false
     * Spring Boot 내에서 OSIV 의 Default 설정인 true 를 false 변경
@@ -326,11 +326,6 @@ Case 1) 사용자 이름 체크 (공백, 스페이스 허용 불가)
 
 
 ![캡처](https://user-images.githubusercontent.com/20740884/112323614-4d7f5a00-8cf5-11eb-8b50-3d8a5c6420e7.JPG)
-
-
-
-#### | 참고 자료 (테스트 커버리지)
-![테스트_커버리지](https://user-images.githubusercontent.com/20740884/112324166-d4cccd80-8cf5-11eb-94b3-4f5a0b2be58f.JPG)
 
 ---   
 
